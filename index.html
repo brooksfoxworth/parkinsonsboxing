@@ -62,14 +62,25 @@
             flex-shrink: 0;
         }
         
-        /* Hero video styling */
+        /* Hero video styling with optimizations */
         .hero-video {
             object-fit: cover;
             width: 100%;
             height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
+            will-change: transform;
+            transform: translateZ(0); /* Hardware acceleration */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        
+        /* Video loading optimization */
+        .hero-video::-webkit-media-controls {
+            display: none !important;
+        }
+        
+        .hero-video::-webkit-media-controls-enclosure {
+            display: none !important;
         }
         
         /* Mobile header logo styling */
@@ -95,6 +106,7 @@
                 align-items: center;
                 position: absolute;
                 right: 1rem;
+                top: 1.5rem;
             }
             
             /* Mobile-specific video styling */
@@ -861,6 +873,40 @@ window.addEventListener('resize', function() {
     if (mobileMenu && window.innerWidth >= 768) {
         mobileMenu.classList.add('hidden');
     }
+});
+
+// Hero video optimization
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait for page content to load before optimizing videos
+    setTimeout(() => {
+        const heroVideos = document.querySelectorAll('.hero-video');
+        heroVideos.forEach(video => {
+            // Optimize video loading
+            video.addEventListener('loadedmetadata', function() {
+                // Video metadata loaded, ready to play
+                this.style.opacity = '1';
+            });
+            
+            video.addEventListener('error', function() {
+                // If video fails to load, show poster image
+                console.log('Video failed to load, showing poster image');
+                this.style.display = 'none';
+                const fallbackImg = this.querySelector('img');
+                if (fallbackImg) {
+                    fallbackImg.style.display = 'block';
+                }
+            });
+            
+            // Reduce quality on slower connections
+            if (navigator.connection && navigator.connection.effectiveType) {
+                const connectionType = navigator.connection.effectiveType;
+                if (connectionType === 'slow-2g' || connectionType === '2g') {
+                    video.preload = 'none';
+                    video.poster = video.getAttribute('poster');
+                }
+            }
+        });
+    }, 1000);
 });
 </script>
 

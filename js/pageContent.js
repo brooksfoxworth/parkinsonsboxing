@@ -19,10 +19,23 @@ const PageContent = {
                         </div>
                         <div class="md:w-1/2 relative flex items-center justify-center" style="animation: fadeInRight 0.8s ease-out;">
                             <div class="bg-white rounded-xl p-1 border border-gray-200 shadow-2xl w-full">
-                                <div class="w-full h-64 md:h-80 flex items-center justify-center overflow-hidden rounded-lg">
-                                    <img src="./assets/images/specializedtraining.jpg" 
-                                         alt="Specialized Training for Neurological Wellness - Parkinson's Boxing" 
-                                         class="max-w-full max-h-full object-cover">
+                                <div class="w-full h-64 md:h-80 flex items-center justify-center overflow-hidden rounded-lg relative">
+                                    <video 
+                                        class="hero-video w-full h-full object-cover rounded-lg"
+                                        autoplay 
+                                        muted 
+                                        loop 
+                                        playsinline
+                                        preload="metadata"
+                                        poster="./assets/images/specializedtraining.jpg"
+                                        onloadstart="this.style.opacity='0'; setTimeout(() => this.style.opacity='1', 100);"
+                                        style="transition: opacity 0.3s ease;">
+                                        <source src="./assets/videos/herovideo.mp4" type="video/mp4">
+                                        <!-- Fallback image for browsers that don't support video -->
+                                        <img src="./assets/images/specializedtraining.jpg" 
+                                             alt="Specialized Training for Neurological Wellness - Parkinson's Boxing" 
+                                             class="w-full h-full object-cover rounded-lg">
+                                    </video>
                                 </div>
                             </div>
                         </div>
