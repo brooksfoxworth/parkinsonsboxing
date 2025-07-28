@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <style>
+        /* Mobile logo styles with !important to ensure they take effect */
+        #mobile-logo {
+            height: 120px !important;
+            width: auto !important;
+            margin-top: 1rem !important;
+            display: block !important;
+        }
+        #mobile-menu .flex.justify-center {
+            padding-top: 2rem !important;
+            padding-bottom: 1.5rem !important;
+        }
+    </style>
+    <title>Parkinson's Boxing - Specialized Training for Parkinson's Disease</title>
+    <meta name="description" content="Parkinson's Boxing - One-on-one custom programs designed to relieve & help offset the symptoms of Parkinson's Disease. Professional boxing training tailored for neurological wellness.">
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <style>
+        /* Header styling */
+        .header-container {
+            position: relative;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100px;
+            transition: all 0.3s ease;
+        }
+        
+        .header-expanded .header-container {
+            flex-direction: column;
+            height: auto;
+            padding: 1rem;
+        }
+        
+        .logo-container {
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .header-expanded .logo-container {
+            margin-bottom: 1rem;
+        }
+        
+        /* Menu item image */
+        .menu-item-image {
+            width: 7rem;
+            height: 7rem;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* Hero video styling */
+        .hero-video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Mobile header logo styling */
+        @media (max-width: 768px) {
+            .logo-container img {
+                height: 120px !important;
+                margin-top: 10px !important;
+            }
+            .header-container {
+                height: 140px;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+            .logo-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex: 1;
+            }
+            .mobile-menu-container {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                right: 1rem;
+            }
+            
+            /* Mobile-specific video styling */
+            .hero-video {
+                object-fit: cover !important;
+                width: 100% !important;
+                height: 100% !important;
+                min-width: 100% !important;
+                min-height: 100% !important;
+                transform: scale(1.38);
+            }
+        }
+        
+        /* Navigation items */
+        .nav-item {
+            position: relative;
+        }
+        
+        /* Dropdown menu */
+        .dropdown-menu {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) translateY(-0.5rem);
+            margin-top: 0.5rem;
+            width: 16rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 0.5rem 0;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover .dropdown-menu,
+        .nav-item:focus-within .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* Expanded header state */
+        .header-expanded {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        
+        .header-expanded .logo-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .header-expanded .main-nav {
+            position: relative;
+            left: auto;
+            transform: none;
+            margin: 0 auto;
+        }
+        
+        /* Dropdown items */
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #1f2937;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #EBF8FF;
+        }
+        
+        .dropdown-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+            color: #2563EB;
+        }
+        
+        .dropdown-divider {
+            border-top: 1px solid #f3f4f6;
+            margin: 0.25rem 0;
+        }
+        
+        /* Navigation links */
+        .nav-link {
+            position: relative;
+            display: inline-block;
+            color: white !important;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-link:hover {
+            color: #E0F2FE !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #E0F2FE;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Chevron animation */
+        .chevron {
+            transition: transform 0.2s ease;
+        }
+        
+        .nav-item:hover .chevron {
+            transform: rotate(180deg);
+        }
+    </style>
+
+    <link href="./style.css" rel="stylesheet"/>
+    <link href="./css/custom.css" rel="stylesheet"/>
+    <link href="./css/header-fix.css" rel="stylesheet"/>
+</head>
+<body class="bg-[var(--background-color)] text-[var(--text-dark)]">
+<div class="relative flex size-full min-h-screen flex-col justify-between group/design-root overflow-x-hidden">
+
+    <header id="main-header" style="background-color: #2563EB !important; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+        <div class="header-container">
+            <!-- Logo on the left -->
+            <div class="logo-container">
+                <h1 style="margin: 0;">
+                    <img src="./assets/images/logo.png" alt="Parkinson's Boxing" style="height: 80px; width: auto; object-fit: contain;">
+                </h1>
+            </div>
+            
+            <!-- Navigation in the center -->
+            <nav class="main-nav hidden md:flex items-center">
+                <div class="flex space-x-8">
+                    <div class="nav-item">
+                        <a href="#" data-page-link="home" class="nav-link">
+                            Home
+                        </a>
+                    </div>
+                    
+                    <div class="nav-item">
+                        <a href="#" data-page-link="about" class="nav-link">
+                            About
+                        </a>
+                    </div>
+                    
+                    <div class="nav-item">
+                        <a href="#" data-page-link="contact" class="nav-link">
+                            Contact
+                        </a>
+                    </div>
+                    
+                    <div class="nav-item">
+                        <div class="relative group">
+                            <button class="nav-link flex items-center">
+                                Programs
+                                <svg class="w-4 h-4 ml-1 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            
+                            <!-- Dropdown Menu -->
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item" data-page-link="programs">
+                                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                    One-on-One Training
+                                </a>
+                                <a href="#" class="dropdown-item" data-page-link="classes">
+                                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                    Group Classes
+                                </a>
+                                <a href="#" class="dropdown-item" data-page-link="therapy">
+                                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                    </svg>
+                                    Physical Therapy Integration
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item" data-page-link="trainers">
+                                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                    Our Trainers
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item" data-page-link="schedule">
+                                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    Schedule Session
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="nav-item">
+                        <a href="#" data-page-link="gallery" class="nav-link">
+                            Gallery
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Mobile menu only -->
+            <div class="flex items-center mobile-menu-container">
+                <button id="mobile-menu-button" class="md:hidden p-1 hover:bg-gray-800 rounded-md transition-colors duration-200" style="color: white !important;" onclick="toggleMobileMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: white !important;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-blue-600 z-50 overflow-y-auto">
+        <div class="container mx-auto px-4 py-6 min-h-screen">
+            <!-- Close button -->
+            <div class="flex justify-end mb-6">
+                <button onclick="toggleMobileMenu()" class="text-white hover:text-blue-200 p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Links -->
+            <nav class="space-y-4">
+                <a href="#" data-page-link="home" class="block text-white hover:text-blue-200 py-2 px-4 rounded transition-colors duration-200">
+                    Home
+                </a>
+                <a href="#" data-page-link="about" class="block text-white hover:text-blue-200 py-2 px-4 rounded transition-colors duration-200">
+                    About
+                </a>
+                <a href="#" data-page-link="contact" class="block text-white hover:text-blue-200 py-2 px-4 rounded transition-colors duration-200">
+                    Contact
+                </a>
+                
+                <!-- Programs Submenu -->
+                <div class="border-t border-blue-500 pt-4">
+                    <button onclick="toggleProgramsSubmenu()" class="w-full text-left text-blue-200 font-semibold mb-2 px-4 py-2 hover:text-white transition-colors duration-200 flex items-center justify-between">
+                        Programs
+                        <svg id="programs-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="programs-submenu" class="hidden">
+                        <a href="#" data-page-link="programs" class="block text-white hover:text-blue-200 py-2 px-8 rounded transition-colors duration-200">
+                            One-on-One Training
+                        </a>
+                        <a href="#" data-page-link="classes" class="block text-white hover:text-blue-200 py-2 px-8 rounded transition-colors duration-200">
+                            Group Classes
+                        </a>
+                        <a href="#" data-page-link="therapy" class="block text-white hover:text-blue-200 py-2 px-8 rounded transition-colors duration-200">
+                            Physical Therapy Integration
+                        </a>
+                        <a href="#" data-page-link="trainers" class="block text-white hover:text-blue-200 py-2 px-8 rounded transition-colors duration-200">
+                            Our Trainers
+                        </a>
+                        <a href="#" data-page-link="schedule" class="block text-white hover:text-blue-200 py-2 px-8 rounded transition-colors duration-200">
+                            Schedule Session
+                        </a>
+                    </div>
+                </div>
+                
+                <a href="#" data-page-link="gallery" class="block text-white hover:text-blue-200 py-2 px-4 rounded transition-colors duration-200">
+                    Gallery
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <main id="main-content" class="flex-grow">
+        <!-- Hero Section with Video Background -->
+        <section class="hero-section relative h-[60vh] min-h-[400px] flex items-center justify-center bg-gray-100 overflow-hidden">
+            <!-- Video Background -->
+            <video autoplay muted loop playsinline class="hero-video absolute inset-0 w-full h-full object-cover">
+                <source src="./assets/videos/herovideo.mp4" type="video/mp4">
+                <!-- Fallback image if video doesn't load -->
+                <img src="./assets/images/hero.jpg" alt="Parkinson's Boxing Myrtle Beach" class="absolute inset-0 w-full h-full object-cover">
+            </video>
+            <!-- Dark overlay for better text readability -->
+            <div class="absolute inset-0 bg-black/40 z-10"></div>
+            <div class="relative z-20 text-center px-4">
+                <p class="text-xl text-gray-200 mb-8 max-w-xl mx-auto px-4">Specialized boxing training in Myrtle Beach designed to help manage Parkinson's Disease symptoms through personalized programs and therapeutic sessions.</p>
+                <a href="#" data-page-link="programs" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition-colors transform hover:scale-105">View Our Programs</a>
+            </div>
+        </section>
+        
+        <!-- Featured Categories -->
+        <section class="py-16 bg-black">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-black text-center mb-12 text-white">OUR SPECIALTIES</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-8 bg-gray-900 rounded-xl shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 border border-gray-800">
+                        <div class="w-24 h-24 bg-yellow-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-4xl">☕</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-400">Brazilian Coffee</h3>
+                        <p class="text-gray-300">Savor our signature Brazilian coffee blends, roasted to perfection and brewed fresh daily. Try our famous cafezinho!</p>
+                    </div>
+                    <div class="text-center p-8 bg-gray-900 rounded-xl shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 border border-gray-800">
+                        <div class="w-24 h-24 bg-yellow-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-4xl">🥖</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-400">Fresh Bakery</h3>
+                        <p class="text-gray-300">Indulge in our daily-baked pão de queijo, brigadeiros, and other Brazilian favorites made with traditional recipes.</p>
+                    </div>
+                    <div class="text-center p-8 bg-gray-900 rounded-xl shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 border border-gray-800">
+                        <div class="w-24 h-24 bg-yellow-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-4xl">🛒</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-400">Market</h3>
+                        <p class="text-gray-300">Discover authentic Brazilian ingredients, from feijoada kits to guaraná, to bring the taste of Brazil to your home.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- A Taste of Brazil Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                        <h2 class="text-3xl font-black mb-6 text-gray-900">CAMILLA'S CAFÉ: A TASTE OF BRAZIL</h2>
+                        <p class="text-lg text-gray-700 mb-6">Experience the authentic flavors of Brazil right here at Camilla's Café. Our passion for Brazilian cuisine shines through in every dish, from our freshly baked pão de queijo to our rich, aromatic coffee blends.</p>
+                        <p class="text-lg text-gray-700 mb-8">Using traditional recipes passed down through generations, we bring you the true taste of Brazil's diverse culinary heritage in every bite and sip.</p>
+                        <a href="#" data-page-link="about" class="bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded-full transition-colors inline-block">Our Story</a>
+                    </div>
+                    <div class="md:w-1/2 bg-yellow-100 p-8 rounded-lg">
+                        <h3 class="text-xl font-bold text-center mb-4">Taste of Brazil</h3>
+                        <div class="relative" style="height: 300px; overflow: hidden; border: 2px solid #f59e0b; border-radius: 8px; background-color: #f3f4f6;">
+                            <img 
+                                id="taste-of-brazil-img"
+                                src="./assets/images/tasteofbrazil.jpg" 
+                                alt="A Taste of Brazil at Camilla's Café" 
+                                style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                                onload="console.log('Image loaded successfully!'); this.style.opacity = '1';"
+                                onerror="console.error('Image failed to load'); this.parentElement.innerHTML = '<div class=\'p-4 text-center text-red-600 bg-yellow-100\'>Error loading image. Please check the console for details. Path: ' + this.src + '</div>';"
+                            >
+                            <div id="image-debug" class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-2 hidden">
+                                Image path: ./assets/images/tasteofbrazil.jpg
+                            </div>
+                        </div>
+                        <script>
+                            // Debug script to help troubleshoot image loading
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const img = document.getElementById('taste-of-brazil-img');
+                                const debugInfo = document.getElementById('image-debug');
+                                
+                                // Show debug info on hover
+                                const container = img.parentElement;
+                                container.addEventListener('mouseenter', () => debugInfo.classList.remove('hidden'));
+                                container.addEventListener('mouseleave', () => debugInfo.classList.add('hidden'));
+                                
+                                // Log more debug info
+                                console.log('Image source:', img.src);
+                                console.log('Image complete:', img.complete);
+                                console.log('Image natural dimensions:', img.naturalWidth + 'x' + img.naturalHeight);
+                                
+                                // Check if image loaded
+                                if (img.complete) {
+                                    if (img.naturalWidth === 0) {
+                                        console.error('Image has zero width - likely failed to load');
+                                    }
+                                } else {
+                                    img.onerror = function() {
+                                        console.error('Image failed to load. Full path:', img.src);
+                                        console.error('Image load error details:', this);
+                                    };
+                                }
+                            });
+                        </script>
+                        <p class="text-center mt-4 text-sm text-gray-600">Experience the authentic flavors of Brazil</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</div>
+
+<!-- Swiper.js CDN - Load before our scripts -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 bg-black/95 z-50 hidden transition-all duration-300 ease-in-out transform translate-x-full flex flex-col items-center">
+    <!-- Logo at the top -->
+    <div id="mobile-logo-container" class="w-full border-b border-gray-800" style="padding: 2rem 0 1.5rem 0; display: flex; justify-content: center; align-items: center;">
+        <img id="mobile-logo" src="./assets/images/camillaslogo.png" alt="Camilla's Café" style="height: 280px; width: auto; display: block; max-width: 100%;">
+    </div>
+    
+    <!-- Close button at top right -->
+    <button id="close-mobile-menu" class="absolute top-4 right-4 text-white p-2 hover:bg-gray-800 rounded-full transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+    
+    <!-- Centered navigation menu -->
+    <nav class="flex flex-col items-center w-full px-6 pb-4 pt-2 space-y-3 overflow-y-auto flex-grow justify-start mt-4">
+        <a href="#" data-page-link="home" class="text-2xl font-bold text-white hover:text-blue-400 transition-colors py-3 px-8 rounded-lg hover:bg-gray-900 text-center w-full max-w-xs">
+            <span class="flex items-center">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Home
+            </span>
+        </a>
+        <a href="#" data-page-link="programs" class="text-2xl font-bold text-white hover:text-blue-400 transition-colors py-3 px-8 rounded-lg hover:bg-gray-900 text-center w-full max-w-xs">
+            <span class="flex items-center">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                Programs
+            </span>
+        </a>
+        <a href="#" data-page-link="classes" class="text-2xl font-bold text-white hover:text-blue-400 transition-colors py-3 px-8 rounded-lg hover:bg-gray-900 text-center w-full max-w-xs">
+            <span class="flex items-center">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                Classes
+            </span>
+        </a>
+        <a href="#" data-page-link="trainers" class="text-2xl font-bold text-white hover:text-blue-400 transition-colors py-3 px-8 rounded-lg hover:bg-gray-900 text-center w-full max-w-xs">
+            <span class="flex items-center">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                Trainers
+            </span>
+        </a>
+        <a href="#" data-page-link="about" class="text-2xl font-bold text-white hover:text-blue-400 transition-colors py-3 px-8 rounded-lg hover:bg-gray-900 text-center w-full max-w-xs">
+            <span class="flex items-center">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Our Story
+            </span>
+        </a>
+        <a href="#" data-page-link="contact" class="text-2xl font-bold text-white hover:text-blue-400 transition-colors py-3 px-8 rounded-lg hover:bg-gray-900 text-center w-full max-w-xs">
+            <span class="flex items-center">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                Contact
+            </span>
+        </a>
+
+    </nav>
+</div>
+
+<script>
+    // Handle dropdown menu interactions and ensure mobile logo styles
+    document.addEventListener('DOMContentLoaded', function() {
+        // Force apply mobile logo styles
+        function applyMobileLogoStyles() {
+            const mobileLogo = document.getElementById('mobile-logo');
+            if (mobileLogo) {
+                mobileLogo.style.height = '140px';
+                mobileLogo.style.width = 'auto';
+                mobileLogo.style.display = 'block';
+                mobileLogo.style.marginTop = '1rem';
+                
+                const logoContainer = mobileLogo.closest('.flex.justify-center');
+                if (logoContainer) {
+                    logoContainer.style.paddingTop = '2rem';
+                    logoContainer.style.paddingBottom = '1.5rem';
+                }
+            }
+        }
+        
+        // Store the mobile menu button in a scoped variable
+        const menuButton = document.getElementById('mobile-menu-button');
+        if (menuButton) {
+            menuButton.addEventListener('click', function() {
+                setTimeout(applyMobileLogoStyles, 300); // After menu animation
+            });
+        }
+        
+        // Apply immediately and after a delay
+        applyMobileLogoStyles();
+        setTimeout(applyMobileLogoStyles, 100);
+        const header = document.getElementById('main-header');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        // Handle dropdown hover/focus
+        navItems.forEach(item => {
+            const button = item.querySelector('button');
+            if (!button) return;
+            
+            // Toggle expanded state on click for mobile
+            button.addEventListener('click', () => {
+                const isExpanded = header.classList.contains('header-expanded');
+                if (window.innerWidth < 768) { // Mobile view
+                    if (isExpanded) {
+                        header.classList.remove('header-expanded');
+                    } else {
+                        // Close other open dropdowns
+                        document.querySelectorAll('.nav-item').forEach(i => {
+                            if (i !== item) {
+                                const otherButton = i.querySelector('button');
+                                if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                        header.classList.add('header-expanded');
+                        button.setAttribute('aria-expanded', 'true');
+                    }
+                }
+            });
+            
+            // Handle keyboard navigation
+            button.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    button.click();
+                } else if (e.key === 'Escape') {
+                    header.classList.remove('header-expanded');
+                    button.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-item') && !e.target.closest('#mobile-menu-button')) {
+                header.classList.remove('header-expanded');
+                document.querySelectorAll('.nav-item button').forEach(btn => {
+                    btn.setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+        
+        // Mobile menu toggle with smooth animations
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const body = document.body;
+        
+        // Function to open mobile menu
+        function openMobileMenu() {
+            mobileMenu.classList.remove('hidden');
+            // Trigger reflow to enable the transition
+            void mobileMenu.offsetWidth;
+            mobileMenu.classList.remove('translate-x-full');
+            // Don't disable body scrolling - let users scroll normally
+        }
+        
+        // Function to close mobile menu
+        function closeMobileMenuFunc() {
+            mobileMenu.classList.add('translate-x-full');
+            // Wait for the transition to complete before hiding
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+                // Ensure body scrolling is restored
+                body.style.overflow = '';
+            }, 300);
+        }
+        
+        // Event listeners
+        if (mobileMenuButton && mobileMenu && closeMobileMenu) {
+            // Open menu when clicking the hamburger button
+            mobileMenuButton.addEventListener('click', openMobileMenu);
+            
+            // Close menu when clicking the close button
+            closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+            
+            // Close menu when clicking on a navigation link
+            document.querySelectorAll('#mobile-menu a[data-page-link]').forEach(link => {
+                link.addEventListener('click', closeMobileMenuFunc);
+            });
+            
+            // Close menu when pressing the Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                    closeMobileMenuFunc();
+                }
+            });
+            
+            // Close menu when clicking outside the menu content
+            mobileMenu.addEventListener('click', function(event) {
+                if (event.target === mobileMenu) {
+                    closeMobileMenuFunc();
+                }
+            });
+        }
+        
+        // Sync cart count with mobile menu and dropdown menu
+        function updateMobileCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            const mobileCartCount = document.getElementById('mobile-cart-count');
+            const dropdownCartCount = document.querySelector('.dropdown-menu a[data-page-link="order"] .cart-count');
+            
+            if (cartCount) {
+                const count = cartCount.textContent;
+                
+                // Update mobile cart count
+                if (mobileCartCount) {
+                    mobileCartCount.textContent = count;
+                }
+                
+                // Update dropdown menu cart count
+                if (dropdownCartCount) {
+                    dropdownCartCount.textContent = count;
+                } else {
+                    // If the cart count element doesn't exist in the dropdown, create it
+                    const orderLink = document.querySelector('.dropdown-menu a[data-page-link="order"]');
+                    if (orderLink) {
+                        const countSpan = document.createElement('span');
+                        countSpan.className = 'cart-count ml-2 bg-yellow-500 text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center';
+                        countSpan.textContent = count;
+                        
+                        // Remove existing count if it exists
+                        const existingCount = orderLink.querySelector('.cart-count');
+                        if (existingCount) {
+                            existingCount.remove();
+                        }
+                        
+                        orderLink.appendChild(countSpan);
+                    }
+                }
+            }
+        }
+        
+        // Initial cart count sync
+        updateMobileCartCount();
+        
+        // Listen for cart updates (you might need to modify this based on your cart implementation)
+        // This is a simple example - you might need to adjust it based on your cart system
+        document.addEventListener('cartUpdated', updateMobileCartCount);
+    });
+</script>
+
+<style>
+    /* Smooth transitions for mobile menu */
+    #mobile-menu {
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    
+    #mobile-menu:not(.hidden) {
+        transform: translateX(0);
+    }
+    
+    #mobile-menu.hidden {
+        display: none;
+    }
+    
+    #mobile-menu.translate-x-full {
+        transform: translateX(100%);
+    }
+    
+    /* Better scrollbar for mobile menu */
+    #mobile-menu nav::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    #mobile-menu nav::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    #mobile-menu nav::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+    }
+    
+    /* Mobile logo styles */
+    #mobile-logo {
+        height: 5rem !important;
+        width: auto !important;
+        margin-top: 0.5rem;
+    }
+</style>
+
+<!-- Modular JavaScript Files -->
+<script src="./js/menuData.js"></script>
+<script src="./js/pageContent.js"></script>
+<script src="./js/cart.js"></script>
+<script src="./js/pageManager.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/app.js"></script>
+
+<style>
+    /* Force mobile logo styles at the end of the document */
+    #mobile-logo {
+        height: 8rem !important;
+        min-height: 8rem !important;
+        width: auto !important;
+        max-width: 100% !important;
+        margin-top: 1rem !important;
+        display: block !important;
+    }
+    #mobile-menu .flex.justify-center {
+        padding-top: 3rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+    #mobile-menu .flex.justify-center img {
+        height: 8rem !important;
+        width: auto !important;
+    }
+</style>
+
+<script>
+// Simple mobile menu toggle function
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+        mobileMenu.classList.toggle('hidden');
+    }
+}
+
+// Toggle Programs submenu in mobile menu
+function toggleProgramsSubmenu() {
+    const programsSubmenu = document.getElementById('programs-submenu');
+    const chevron = document.getElementById('programs-chevron');
+    
+    if (programsSubmenu && chevron) {
+        programsSubmenu.classList.toggle('hidden');
+        
+        // Rotate chevron icon
+        if (programsSubmenu.classList.contains('hidden')) {
+            chevron.style.transform = 'rotate(0deg)';
+        } else {
+            chevron.style.transform = 'rotate(180deg)';
+        }
+    }
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    
+    if (mobileMenu && mobileMenuButton) {
+        if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.add('hidden');
+        }
+    }
+});
+
+// Close mobile menu on window resize to desktop size
+window.addEventListener('resize', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu && window.innerWidth >= 768) {
+        mobileMenu.classList.add('hidden');
+    }
+});
+</script>
+
+</body>
+</html>
